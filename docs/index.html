@@ -2725,41 +2725,49 @@ font-size: 0.88rem;
 </header>
 
 
-<p><strong>Narrative word count:</strong> Replace with a number from 750 to 1,000.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This template suggests one way to tell the story. You may rename, combine, or reorder headings and add, remove, or move code chunks. Use plots, tables, selected model output, and prose in whatever combination best communicates your evidence. Keep every required part easy to find, use no more than four primary figures or tables, and delete this note and all bold prompts before submitting.</p>
-</div>
-</div>
+<p><strong>Narrative word count:</strong> 106</p>
 <section id="the-question" class="level2">
 <h2 class="anchored" data-anchor-id="the-question">The question</h2>
-<p><strong>In one or two short paragraphs, introduce the setting, audience, focused research question, data source, observational unit, response, important predictors, and one important data limitation. Lead with what makes the question worth answering.</strong></p>
 <p>Competitive race walking was first introduced a few centuries ago in England. Its expansion interested us in finding how race distance and gender effect race walking speed. For this analysis, our target audience is competitive race walkers. Our hope is to help these racers optimize their racing times and speeds.</p>
 <p>The data were gathered by the World Athletics Race Walking Team Championships. The full datset can be found outline through the following URL: https://data.scorenetwork.org/walking/racewalking_10k_20k_speeds_2024.html</p>
 <p>Important variables in this dataset include gender, distance, and walking speed for each observational unit, the individual racer. These predictors enable us to recognize the relationships between each predictor and the response.</p>
 </section>
 <section id="what-the-baseline-shows" class="level2">
 <h2 class="anchored" data-anchor-id="what-the-baseline-shows">What the baseline shows</h2>
-<p><strong>Describe and justify a simple course-based baseline regression model. Interpret the result that best establishes the rest of the story, including its direction, magnitude, scale, and uncertainty. Explain one limitation or unresolved pattern that motivates deeper analysis.</strong></p>
+<p>We will use the multiple linear regression model because we have two or more variables (race distance and gender) to predict the outcome of our continuous response variable (speed). This model will allow us to see how the variables independently affect the outcome before adding the interaction.</p>
+<p>Holding race distance constant, women have a predicted average race-walking speed of 27.96 meters/minute lower than men. One specific limitation is that race distance and gender don’t fully account for speed as there are underlying factors and covariates such as race-walking experience and age.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages and data, document preparation, and fit the baseline.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>racewalking <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;~/Downloads/racewalking.csv&quot;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>baseline <span class="ot">&lt;-</span> <span class="fu">lm</span>(SPEED <span class="sc">~</span> DISTANCE <span class="sc">+</span> GENDER, <span class="at">data =</span> racewalking)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(baseline)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = SPEED ~ DISTANCE + GENDER, data = racewalking)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-59.037  -6.902   1.646  10.396  23.813 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  2.329e+02  3.137e+00  74.246   &lt;2e-16 ***
+DISTANCE     2.942e-05  1.809e-04   0.163    0.871    
+GENDERWoman -2.796e+01  1.786e+00 -15.653   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 13.71 on 234 degrees of freedom
+Multiple R-squared:  0.5118,    Adjusted R-squared:  0.5076 
+F-statistic: 122.7 on 2 and 234 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show a primary figure or table only if it helps answer the question.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 </div>
 </section>
 <section id="going-beyond-the-baseline" class="level2">

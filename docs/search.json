@@ -4,14 +4,14 @@
     "href": "ai-use.html",
     "title": "AI Use and Verification",
     "section": "",
-    "text": "This page is a work log, not a second report. Short bullets are welcome. It is separate from the final case study and does not count toward the 750 to 1,000 word range."
+    "text": "AI system and date: October ..?\nBefore using AI for the required extension, briefly state your question, course-based core model, baseline result, and the specific limitation or opportunity you wanted to address."
   },
   {
     "objectID": "ai-use.html#starting-point",
     "href": "ai-use.html#starting-point",
     "title": "AI Use and Verification",
-    "section": "Starting point",
-    "text": "Starting point\nAI system and date: Replace.\nBefore using AI for the required extension, briefly state your question, course-based core model, baseline result, and the specific limitation or opportunity you wanted to address."
+    "section": "",
+    "text": "AI system and date: October ..?\nBefore using AI for the required extension, briefly state your question, course-based core model, baseline result, and the specific limitation or opportunity you wanted to address."
   },
   {
     "objectID": "ai-use.html#substantive-prompts",
@@ -53,21 +53,21 @@
     "href": "index.html",
     "title": "How Gender and Distance Impact Race Walking Speed",
     "section": "",
-    "text": "Narrative word count: Replace with a number from 750 to 1,000."
+    "text": "Narrative word count: 106"
   },
   {
     "objectID": "index.html#the-question",
     "href": "index.html#the-question",
     "title": "How Gender and Distance Impact Race Walking Speed",
     "section": "The question",
-    "text": "The question\nIn one or two short paragraphs, introduce the setting, audience, focused research question, data source, observational unit, response, important predictors, and one important data limitation. Lead with what makes the question worth answering.\nCompetitive race walking was first introduced a few centuries ago in England. Its expansion interested us in finding how race distance and gender effect race walking speed. For this analysis, our target audience is competitive race walkers. Our hope is to help these racers optimize their racing times and speeds.\nThe data were gathered by the World Athletics Race Walking Team Championships. The full datset can be found outline through the following URL: https://data.scorenetwork.org/walking/racewalking_10k_20k_speeds_2024.html\nImportant variables in this dataset include gender, distance, and walking speed for each observational unit, the individual racer. These predictors enable us to recognize the relationships between each predictor and the response."
+    "text": "The question\nCompetitive race walking was first introduced a few centuries ago in England. Its expansion interested us in finding how race distance and gender effect race walking speed. For this analysis, our target audience is competitive race walkers. Our hope is to help these racers optimize their racing times and speeds.\nThe data were gathered by the World Athletics Race Walking Team Championships. The full datset can be found outline through the following URL: https://data.scorenetwork.org/walking/racewalking_10k_20k_speeds_2024.html\nImportant variables in this dataset include gender, distance, and walking speed for each observational unit, the individual racer. These predictors enable us to recognize the relationships between each predictor and the response."
   },
   {
     "objectID": "index.html#what-the-baseline-shows",
     "href": "index.html#what-the-baseline-shows",
     "title": "How Gender and Distance Impact Race Walking Speed",
     "section": "What the baseline shows",
-    "text": "What the baseline shows\nDescribe and justify a simple course-based baseline regression model. Interpret the result that best establishes the rest of the story, including its direction, magnitude, scale, and uncertainty. Explain one limitation or unresolved pattern that motivates deeper analysis.\n\n\nShow code\n# Load packages and data, document preparation, and fit the baseline.\n\n\n\n\nShow code\n# Show a primary figure or table only if it helps answer the question."
+    "text": "What the baseline shows\nWe will use the multiple linear regression model because we have two or more variables (race distance and gender) to predict the outcome of our continuous response variable (speed). This model will allow us to see how the variables independently affect the outcome before adding the interaction.\nHolding race distance constant, women have a predicted average race-walking speed of 27.96 meters/minute lower than men. One specific limitation is that race distance and gender don’t fully account for speed as there are underlying factors and covariates such as race-walking experience and age.\n\n\nShow code\nlibrary(tidyverse)\nlibrary(readr)\n\nracewalking &lt;- read_csv(\"~/Downloads/racewalking.csv\")\n\nbaseline &lt;- lm(SPEED ~ DISTANCE + GENDER, data = racewalking)\nsummary(baseline)\n\n\n\nCall:\nlm(formula = SPEED ~ DISTANCE + GENDER, data = racewalking)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-59.037  -6.902   1.646  10.396  23.813 \n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  2.329e+02  3.137e+00  74.246   &lt;2e-16 ***\nDISTANCE     2.942e-05  1.809e-04   0.163    0.871    \nGENDERWoman -2.796e+01  1.786e+00 -15.653   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 13.71 on 234 degrees of freedom\nMultiple R-squared:  0.5118,    Adjusted R-squared:  0.5076 \nF-statistic: 122.7 on 2 and 234 DF,  p-value: &lt; 2.2e-16"
   },
   {
     "objectID": "index.html#going-beyond-the-baseline",

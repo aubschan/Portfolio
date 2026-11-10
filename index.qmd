@@ -6,15 +6,10 @@ date: last-modified
 description: "Replace with a brief description for link previews."
 ---
 
-**Narrative word count:** Replace with a number from 750 to 1,000.
+**Narrative word count:** 106
 
-::: {.callout-tip}
-This template suggests one way to tell the story. You may rename, combine, or reorder headings and add, remove, or move code chunks. Use plots, tables, selected model output, and prose in whatever combination best communicates your evidence. Keep every required part easy to find, use no more than four primary figures or tables, and delete this note and all bold prompts before submitting.
-:::
 
 ## The question
-
-**In one or two short paragraphs, introduce the setting, audience, focused research question, data source, observational unit, response, important predictors, and one important data limitation. Lead with what makes the question worth answering.**
 
 Competitive race walking was first introduced a few centuries ago in England. Its expansion interested us in finding how race distance and gender effect race walking speed. For this analysis, our target audience is competitive race walkers. Our hope is to help these racers optimize their racing times and speeds.
 
@@ -24,15 +19,20 @@ Important variables in this dataset include gender, distance, and walking speed 
 
 ## What the baseline shows
 
-**Describe and justify a simple course-based baseline regression model. Interpret the result that best establishes the rest of the story, including its direction, magnitude, scale, and uncertainty. Explain one limitation or unresolved pattern that motivates deeper analysis.**
+We will use the multiple linear regression model because we have two or more variables (race distance and gender) to predict the outcome of our continuous response variable (speed). This model will allow us to see how the variables independently affect the outcome before adding the interaction.
+
+Holding race distance constant, women have a predicted average race-walking speed of 27.96 meters/minute lower than men. One specific limitation is that race distance and gender don’t fully account for speed as there are underlying factors and covariates such as race-walking experience and age.
 
 ```{r}
-# Load packages and data, document preparation, and fit the baseline.
+library(tidyverse)
+library(readr)
+
+racewalking <- read_csv("~/Downloads/racewalking.csv")
+
+baseline <- lm(SPEED ~ DISTANCE + GENDER, data = racewalking)
+summary(baseline)
 ```
 
-```{r}
-# Show a primary figure or table only if it helps answer the question.
-```
 
 ## Going beyond the baseline
 
