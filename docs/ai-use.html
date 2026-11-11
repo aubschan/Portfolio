@@ -2680,43 +2680,38 @@ font-size: 0.88rem;
 
 <section id="starting-point" class="level2">
 <h2 class="anchored" data-anchor-id="starting-point">Starting point</h2>
-<p><strong>AI system and date:</strong> October ..?</p>
-<p><strong>Before using AI for the required extension, briefly state your question, course-based core model, baseline result, and the specific limitation or opportunity you wanted to address.</strong></p>
+<p><strong>AI system and date:</strong> ChatGPT, October 22</p>
+<p>How do race, distance, and gender affect race walking speed? Course-Based Core Model: Multiple Linear Regression Model Baseline Result: Women have a predicted average race-walking speed of 29.76 meters/minute lower than men. Specific Limitation: Race, distance, and gender don’t fully account for speed as there are underlying factors and covariates such as race-walking experience and age.</p>
 </section>
 <section id="substantive-prompts" class="level2">
 <h2 class="anchored" data-anchor-id="substantive-prompts">Substantive prompts</h2>
-<p>Paste the exact prompts that shaped the extension. Include the customized extension-selection prompt from the checkpoint and any important implementation follow-ups. Delete unused prompt blocks.</p>
 <blockquote class="blockquote">
-<p>Replace with an exact prompt.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>Replace with another exact prompt, if needed.</p>
+<p>I am creating a regression case study in R and Quarto. My question is “How do race, distance, and gender affect race walking speed?” The response is speed and the main predictors are distance, gender, and interaction between distance and gender. Also, my course-based core model is multiple-linear regression. My main result so far is woman have a predicted average race-walking speed of 29.76 meters/minute lower than men. I found this limitation: race distance and gender don’t fully account for speed as there are underlying factors and covariates such as race-walking experience and age. Suggest three feasible extensions that keep the core analysis connected to regression methods taught in my class. One option may be a model not taught in class used as a comparator. For each, explain how it strengthens the same research question, how its result would enter the final case study, the implementation steps, and two ways I could verify it. Do not choose for me.</p>
 </blockquote>
 </section>
 <section id="my-decisions" class="level2">
 <h2 class="anchored" data-anchor-id="my-decisions">My decisions</h2>
 <ul>
-<li><strong>Accepted:</strong> What useful advice did you use?</li>
-<li><strong>Changed:</strong> What did you adapt to fit your data or goals?</li>
-<li><strong>Rejected or corrected:</strong> What advice was unsuitable, unnecessary, or wrong?</li>
+<li><strong>Accepted:</strong> I used the suggestion to test whether the relationship with distance is curved so we can fit the data better and change the estimated gender difference at different distances.</li>
+<li><strong>Changed:</strong> Although we had the limitation about distance and gender not being able to fully account for speed and look at other variables like age and experience, there is nothing for those variables in this dataset. Therefore, we will have to forego that suggestion.</li>
+<li><strong>Rejected or corrected:</strong> Similar to the response above, the advice to add age and race-walking experience is unsuitable since we don’t have data on those two variables.</li>
 </ul>
 <p><strong>Connection to the final case study:</strong> Identify where the extension’s method and result appear on the final page and how they strengthen the course-based analysis.</p>
 </section>
 <section id="independent-verification" class="level2">
 <h2 class="anchored" data-anchor-id="independent-verification">Independent verification</h2>
 <ol type="1">
-<li><strong>Check and result:</strong> Replace with an official source, diagnostic, simulation, manual calculation, comparison with a known method, or another suitable check.</li>
-<li><strong>Check and result:</strong> Replace with a different check and what you learned.</li>
+<li><strong>Check and result:</strong> I compared the linear and quadratic models using anova(). The comparison showed 0 added degrees of freedom and an RSS difference of about 1.46e-11. This comparison did not show that the quadratic model improved fit.</li>
+<li><strong>Check and result:</strong> I compared the linear and quadratic models using 10-fold cross-validation. Both had an RMSE of 13.90408m/min, so the quadratic model did not reduce prediction error compared with the linear model on these folds.</li>
 </ol>
-<p>Link or cite verification sources where appropriate. A second AI response does not count as independent verification.</p>
 </section>
 <section id="remaining-limitation" class="level2">
 <h2 class="anchored" data-anchor-id="remaining-limitation">Remaining limitation</h2>
-<p><strong>State one important uncertainty, failure mode, or limitation that remains.</strong></p>
+<p>One important limitation is that an F-test couldn’t be calculated because the quadratic model added zero estimable parameters compared with the linear model. This is likely because distance only has two distinct values and with that, the squared-distance term can be redundant with the intercept and linear-distance terms, so it adds no new information.</p>
 </section>
 <section id="other-ai-use-if-any" class="level2">
 <h2 class="anchored" data-anchor-id="other-ai-use-if-any">Other AI use, if any</h2>
-<p><strong>Briefly disclose earlier debugging, proofreading, or other AI assistance. Write “None” if there was no other use.</strong></p>
+<p>I used AI for assistance with coding for the independent verification portion and debugging any errors.</p>
 
 
 </section>

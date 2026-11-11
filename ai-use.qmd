@@ -6,37 +6,34 @@ author: "Kaitlynn Beatty, Marla Scott, Aubrey Hamilton"
 
 ## Starting point
 
-**AI system and date:** October ..?
+**AI system and date:** ChatGPT, October 22
 
-**Before using AI for the required extension, briefly state your question, course-based core model, baseline result, and the specific limitation or opportunity you wanted to address.**
+How do race, distance, and gender affect race walking speed?
+Course-Based Core Model: Multiple Linear Regression Model
+Baseline Result: Women have a predicted average race-walking speed of 29.76 meters/minute lower than men.
+Specific Limitation: Race, distance, and gender don't fully account for speed as there are underlying factors and covariates such as race-walking experience and age.
 
 ## Substantive prompts
 
-Paste the exact prompts that shaped the extension. Include the customized extension-selection prompt from the checkpoint and any important implementation follow-ups. Delete unused prompt blocks.
-
-> Replace with an exact prompt.
-
-> Replace with another exact prompt, if needed.
+> I am creating a regression case study in R and Quarto. My question is "How do race, distance, and gender affect race walking speed?" The response is speed and the main predictors are distance, gender, and interaction between distance and gender. Also, my course-based core model is multiple-linear regression. My main result so far is woman have a predicted average race-walking speed of 29.76 meters/minute lower than men. I found this limitation: race distance and gender don't fully account for speed as there are underlying factors and covariates such as race-walking experience and age. Suggest three feasible extensions that keep the core analysis connected to regression methods taught in my class. One option may be a model not taught in class used as a comparator. For each, explain how it strengthens the same research question, how its result would enter the final case study, the implementation steps, and two ways I could verify it. Do not choose for me.
 
 ## My decisions
 
-- **Accepted:** What useful advice did you use?
-- **Changed:** What did you adapt to fit your data or goals?
-- **Rejected or corrected:** What advice was unsuitable, unnecessary, or wrong?
+- **Accepted:** I used the suggestion to test whether the relationship with distance is curved so we can fit the data better and change the estimated gender difference at different distances.
+- **Changed:** Although we had the limitation about distance and gender not being able to fully account for speed and look at other variables like age and experience, there is nothing for those variables in this dataset. Therefore, we will have to forego that suggestion. 
+- **Rejected or corrected:** Similar to the response above, the advice to add age and race-walking experience is unsuitable since we don't have data on those two variables. 
 
 **Connection to the final case study:** Identify where the extension's method and result appear on the final page and how they strengthen the course-based analysis.
 
 ## Independent verification
 
-1. **Check and result:** Replace with an official source, diagnostic, simulation, manual calculation, comparison with a known method, or another suitable check.
-2. **Check and result:** Replace with a different check and what you learned.
-
-Link or cite verification sources where appropriate. A second AI response does not count as independent verification.
+1. **Check and result:** I compared the linear and quadratic models using anova(). The comparison showed 0 added degrees of freedom and an RSS difference of about 1.46e-11. This comparison did not show that the quadratic model improved fit.
+2. **Check and result:** I compared the linear and quadratic models using 10-fold cross-validation. Both had an RMSE of 13.90408m/min, so the quadratic model did not reduce prediction error compared with the linear model on these folds. 
 
 ## Remaining limitation
 
-**State one important uncertainty, failure mode, or limitation that remains.**
+One important limitation is that an F-test couldn't be calculated because the quadratic model added zero estimable parameters compared with the linear model. This is likely because distance only has two distinct values and with that, the squared-distance term can be redundant with the intercept and linear-distance terms, so it adds no new information.
 
 ## Other AI use, if any
 
-**Briefly disclose earlier debugging, proofreading, or other AI assistance. Write “None” if there was no other use.**
+I used AI for assistance with coding for the independent verification portion and debugging any errors.

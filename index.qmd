@@ -1,9 +1,9 @@
 ---
-title: "How Gender and Distance Impact Race Walking Speed"
-subtitle: "Our analysis will help competitive race walkers optimize their racing times and speeds."
+title: "Race Walking"
+subtitle: "How Gender and Distance Impact Race Walking Speed"
 author: "Kaitlynn Beatty, Marla Scott, Aubrey Hamilton"
 date: last-modified
-description: "Replace with a brief description for link previews."
+description: "Helping competitive race walkers optimize their racing times and speeds."
 ---
 
 **Narrative word count:** 106
